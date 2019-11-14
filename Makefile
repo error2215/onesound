@@ -1,14 +1,15 @@
 PROTO_ZIP='protoc-3.7.1-linux-x86_64.zip'
 
 # Download and install all dependencies
-install:
+install: mod
+	@echo "All packages successfully installed!"
 	@wget https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1/$(PROTO_ZIP)
 	@unzip -o $(PROTO_ZIP)
 	@rm $(PROTO_ZIP)
-	@go get github.com/golang/protobuf/protoc-gen-go
-	@go build github.com/golang/protobuf/protoc-gen-go
-	@go get github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
-	@go build github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+	@ GO111MODULE=on go get github.com/golang/protobuf/protoc-gen-go
+	@ GO111MODULE=on go build github.com/golang/protobuf/protoc-gen-go
+	@ GO111MODULE=on go get github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+	@ GO111MODULE=on go build github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
 
 # Build gRPC files
 build_go: clean_go
@@ -38,6 +39,34 @@ clean_go:
 clean_docs:
 	rm -rf docs/*
 
-build: build_go build_docs
+build: build_go build_docs build_bin
 
 clean: clean_go clean_docs
+
+mod:
+	@echo "======================================================================"
+	@echo "Run MOD"
+	@ GO111MODULE=on go mod verify
+	@ GO111MODULE=on go mod tidy
+	@ GO111MODULE=on go mod vendor
+	@ GO111MODULE=on go mod download
+	@ GO111MODULE=on go mod verify
+	@echo "======================================================================"
+
+# Run tests
+tests:
+	$(SOURCE_PATH) go test  -coverprofile=coverage.out -v ./backend/api/
+	go tool cover -html=coverage.out -o coverage.html
+	rm coverage.out
+
+test: mod tests
+
+# Build the server
+build_bin:
+	@echo "Building the binary..."
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./application ./main.go
+
+# Run the server
+run: build
+	./application
+
