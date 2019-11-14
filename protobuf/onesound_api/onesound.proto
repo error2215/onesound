@@ -1,0 +1,11 @@
+syntax = "proto3";
+option go_package = "onesound/protobuf/onesound_api";
+
+package onesound.protobuf.onesound_api;
+
+import "protobuf/common/common.proto";
+
+
+service OneSoundAPI {
+    rpc HealthCheck(.onesound.protobuf.common.HealthCheckRequest) returns (.onesound.protobuf.common.HealthCheckResponse);
+}

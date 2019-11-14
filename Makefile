@@ -12,12 +12,15 @@ install:
 
 # Build gRPC files
 build_go: clean_go
+	@echo "Creating folders..."
+	@mkdir compiled
+	@mkdir docs
 	@echo "Generating common Go sources..."
 	@./bin/protoc --plugin=protoc-gen-go -I. --go_out=compiled protobuf/common/*.proto
 	@echo "Generating client and server sources..."
-	@./bin/protoc --plugin=protoc-gen-go -I. --go_out=plugins=grpc:compiled protobuf/onesound/*.proto  # also generate server class
+	@./bin/protoc --plugin=protoc-gen-go -I. --go_out=plugins=grpc:compiled protobuf/onesound_api/*.proto  # also generate server class
 	@echo "Moving generated files..."
-	@mv -f compiled/onesound/go/* compiled/
+	@mv -f compiled/onesound/protobuf/* compiled/
 	@rm -rf compiled/onesound
 
 

@@ -15,6 +15,6 @@
 /protoc-gen-doc
 /protoc-gen-go
 /readme.txt
-/docs/
 /.idea/
+/docs/
 /compiled/

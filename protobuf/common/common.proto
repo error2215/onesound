@@ -1,11 +1,30 @@
 syntax = "proto3";
-option go_package = "onesound/go/protobuf/common";
+option go_package = "onesound/protobuf/common";
 
-package clutch.protobuf.common;
+package onesound.protobuf.common;
 
 /**
  * Shared for RPC responses that do not return any data
  */
-message SimpleResponseasd {
+message SimpleResponse {
     bool OK = 1;
+}
+
+/**
+ * Health check request
+ */
+message HealthCheckRequest {
+    string Service = 1; // name of the service to check
+}
+
+/**
+ * Health check response
+ */
+message HealthCheckResponse {
+    enum ServingStatus {
+        UNKNOWN = 0;
+        SERVING = 1; // service is up and accepting new request
+        NOT_SERVING = 2; // service is suspended / shutting down
+    }
+    ServingStatus Status = 1;  // current service status
 }
