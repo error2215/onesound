@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package = "onesound/protobuf/onesound_models";
+option go_package = "onesound/compiled/onesound_models";
 
 package onesound.protobuf.onesound_models;
 

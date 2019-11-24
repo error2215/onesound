@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package = "onesound/protobuf/common";
+option go_package = "onesound/compiled/common";
 
 package onesound.protobuf.common;
 

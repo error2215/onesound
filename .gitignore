@@ -16,7 +16,9 @@
 /protoc-gen-go
 /readme.txt
 /.idea/
-/docs/
-/compiled/
 /vendor/
 /.env
+compiled/*
+docs/*
+!docs/.gitkeep
+!compiled/.gitkeep
