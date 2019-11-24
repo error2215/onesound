@@ -1,11 +1,12 @@
 package api
 
 import (
-	"onesound/server/api/grpc"
-	"onesound/server/config"
 	"sync"
 
 	log "github.com/sirupsen/logrus"
+
+	"onesound/server/api/grpc"
+	"onesound/server/config"
 )
 
 func Start() {

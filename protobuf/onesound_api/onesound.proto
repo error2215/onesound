@@ -4,8 +4,108 @@ option go_package = "onesound/protobuf/onesound_api";
 package onesound.protobuf.onesound_api;
 
 import "protobuf/common/common.proto";
+import "protobuf/onesound_models/room.proto";
 
 
 service OneSoundAPI {
+    //Health Check
     rpc HealthCheck(.onesound.protobuf.common.HealthCheckRequest) returns (.onesound.protobuf.common.HealthCheckResponse);
+    //Create Room
+    rpc CreateRoom(CreateRoomRequest) returns(CreateRoomResponse);
+    // Remove Room
+    rpc DeleteRoom(DeleteRoomRequest) returns(.onesound.protobuf.common.SimpleResponse);
+
+    // Add Video To Room (only using voting)
+    rpc AddVideo(AddVideoRequest) returns (.onesound.protobuf.common.SimpleResponse);
+    // Remove Video from room (only using voting)
+    rpc RemoveVideo(SkipVideoRequest) returns (.onesound.protobuf.common.SimpleResponse);
+
+    // Get room's playlist
+    rpc GetPlaylist(GetPlaylistRequest) returns (GetPlaylistResponse);
+
+    // Create some voting in room
+    rpc CreateVoting (CreateVotingRequest) returns (.onesound.protobuf.common.SimpleResponse);
+    // Add one point to created voting
+    rpc AddPointToVoting (AddPointToVotingRequest) returns (AddPointToVotingResponse);
+}
+
+/**
+ * Request to create a new room in OneSound
+ */
+message CreateRoomRequest {
+    int32 Name = 1; // id of created room
+    string Pass = 2; // if Pass == "" -> open room, else - closed
+}
+
+/**
+ * Response of creating a new room in OneSound
+ */
+message CreateRoomResponse {
+    onesound.protobuf.onesound_models.Room Room = 1; // instance of created room
+}
+
+/**
+ * Request to remove some room in OneSound
+ */
+message DeleteRoomRequest {
+    int32 Id = 1; // id of room
+    string Token = 2;// access token that was returned when room was created
+}
+
+/**
+ * Request to add a video into room's playlist
+ */
+message AddVideoRequest{
+    string URL = 1;
+    string RoomId = 2; // id of room where video must be added
+    string Token = 3; // access token that was returned when room was created
+}
+
+/**
+ * Request to remove a video from room's playlist
+ */
+message SkipVideoRequest{
+    string URL = 1; // URL of the video, that must be removed
+    string RoomId = 2; // id of room where video must be removed
+    string Token = 3; // access token that was returned when room was created
+}
+
+/**
+ * Request to add a video into room's playlist
+ */
+message GetPlaylistRequest{
+    string RoomId = 1; // id of requested room's playlist
+    string RoomToken = 2; // access token that was returned when room was created
+}
+
+/**
+ * Request to remove a video from room's playlist
+ */
+message GetPlaylistResponse{
+    .onesound.protobuf.onesound_models.Playlist Playlist = 1; // playlist of the room
+}
+
+/**
+ * Request to create some voting in a room
+ */
+message CreateVotingRequest{
+    .onesound.protobuf.onesound_models.VotingType VotingType = 1; // type of voting
+    string RoomId = 2; // id of room where voting must be created
+    string RoomToken = 3; // access token that was returned when room was created
+}
+
+/**
+ * Request to add a video into room's playlist
+ */
+message AddPointToVotingRequest{
+    string ClientHash = 1; //some unique hash that is generating on client
+    string RoomId = 2; // id of room where we are adding point
+    string RoomToken = 3; // access token that was returned when room was created
+}
+
+/**
+ * Request to remove a video from room's playlist
+ */
+message AddPointToVotingResponse{
+    int32 Score = 1; // score in voting
 }

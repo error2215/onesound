@@ -1,0 +1,33 @@
+syntax = "proto3";
+option go_package = "onesound/protobuf/onesound_models";
+
+package onesound.protobuf.onesound_models;
+
+message Room {
+    int32 Id = 1 [json_name="id"]; // if of room
+    int32 Name = 2 [json_name="name"]; // name of the room
+    string Token = 3 [json_name="token"]; // access token for requests
+    string Password = 4 [json_name="password"]; // password to access the room (if if equals "" -> room is open)
+    Playlist Playlist = 5 [json_name="playlist"]; // playlist of the room (list of videos)
+    Voting Voting = 6 [json_name="voting"]; // voting of the room
+}
+
+message Playlist {
+    repeated Video Videos = 2;
+}
+
+message Video {
+    int32 Id = 1;
+    int32 Weight = 2;
+    string URL = 3;
+}
+
+message Voting {
+    int32 Id = 1;
+    int32 Score = 2;
+}
+
+enum VotingType {
+    SKIP_VIDEO = 0;
+    ADD_VIDEO = 1;
+}

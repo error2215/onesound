@@ -9,7 +9,10 @@ package onesound.protobuf.common;
 message SimpleResponse {
     bool OK = 1;
 }
-
+/**
+ * Shared for RPC requests that do not need any data
+ */
+message Empty {}
 /**
  * Health check request
  */
