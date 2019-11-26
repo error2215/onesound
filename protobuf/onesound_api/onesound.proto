@@ -33,7 +33,7 @@ service OneSoundAPI {
  * Request to create a new room in OneSound
  */
 message CreateRoomRequest {
-    int32 Name = 1; // id of created room
+    string Name = 1; // name of room
     string Pass = 2; // if Pass == "" -> open room, else - closed
 }
 

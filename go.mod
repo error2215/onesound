@@ -7,10 +7,12 @@ require (
 	github.com/Masterminds/goutils v1.1.0 // indirect
 	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/Masterminds/sprig v2.22.0+incompatible // indirect
+	github.com/error2215/go-convert v0.0.0-20191124120022-8eb17ae3cde5
 	github.com/golang/protobuf v1.3.2
 	github.com/google/uuid v1.1.1 // indirect
 	github.com/huandu/xstrings v1.2.0 // indirect
 	github.com/imdario/mergo v0.3.8 // indirect
+	github.com/iostrovok/go-convert v0.0.3 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/lyft/protoc-gen-validate v0.1.0 // indirect
 	github.com/mitchellh/copystructure v1.0.0 // indirect

@@ -22,3 +22,4 @@ compiled/*
 docs/*
 !docs/.gitkeep
 !compiled/.gitkeep
+/application
