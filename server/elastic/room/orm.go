@@ -46,7 +46,7 @@ func (r *Request) CreateRoom(ctx context.Context) (*model.Room, error) {
 	return nil, errors.New("Room was not created due to some problems ")
 }
 
-func (r Request) getNewId(ctx context.Context) int32 {
+func (r *Request) getNewId(ctx context.Context) int32 {
 	hits, err := client.GetClient().Search().
 		Index(r.index).Query(elastic.NewBoolQuery()).Sort(idField, false).Size(1).Do(ctx)
 	if err != nil {
@@ -56,4 +56,8 @@ func (r Request) getNewId(ctx context.Context) int32 {
 		return 1
 	}
 	return convert.Int32(hits.Hits.Hits[0].Id)
+}
+
+func (r *Request) DeleteRoom(ctx context.Context) error {
+
 }

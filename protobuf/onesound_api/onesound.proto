@@ -27,6 +27,9 @@ service OneSoundAPI {
     rpc CreateVoting (CreateVotingRequest) returns (.onesound.protobuf.common.SimpleResponse);
     // Add one point to created voting
     rpc AddPointToVoting (AddPointToVotingRequest) returns (AddPointToVotingResponse);
+
+    rpc Register (RegisterRequest) returns (.onesound.protobuf.common.SimpleResponse);
+    rpc Auth (AuthRequest) returns (AuthResponse);
 }
 
 /**
@@ -95,7 +98,7 @@ message CreateVotingRequest{
 }
 
 /**
- * Request to add a video into room's playlist
+ * Request to add point to some voting in a room
  */
 message AddPointToVotingRequest{
     string ClientHash = 1; //some unique hash that is generating on client
@@ -104,8 +107,31 @@ message AddPointToVotingRequest{
 }
 
 /**
- * Request to remove a video from room's playlist
+ * Response of adding a point to a voting
  */
 message AddPointToVotingResponse{
     int32 Score = 1; // score in voting
+}
+
+/**
+ * Request to register a new user
+ */
+message RegisterRequest{
+    string Password = 1;
+    string Email = 2;
+}
+
+/**
+ * Request to auth user
+ */
+message AuthRequest{
+    string Password = 1;
+    string Email = 2;
+}
+
+/**
+ * Response of auth
+ */
+message AuthResponse{
+    map<string, string> Response = 1;
 }

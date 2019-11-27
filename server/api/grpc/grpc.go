@@ -36,12 +36,12 @@ func (g *GRPCServer) CreateRoom(ctx context.Context, in *onesound_api.CreateRoom
 	return nil, errors.New("Room with such name is already exist. Please try another one")
 }
 
-func (g *GRPCServer) DeleteRoom(context.Context, *onesound_api.DeleteRoomRequest) (*common.SimpleResponse, error) {
+func (g *GRPCServer) DeleteRoom(ctx context.Context, in *onesound_api.DeleteRoomRequest) (*common.SimpleResponse, error) {
 	panic("implement me")
 }
 
 func (g *GRPCServer) AddVideo(context.Context, *onesound_api.AddVideoRequest) (*common.SimpleResponse, error) {
-	panic("implement me")
+
 }
 
 func (g *GRPCServer) RemoveVideo(context.Context, *onesound_api.SkipVideoRequest) (*common.SimpleResponse, error) {
