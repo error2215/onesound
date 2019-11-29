@@ -1,0 +1,11 @@
+syntax = "proto3";
+option go_package = "onesound/compiled/onesound_models";
+
+package onesound.protobuf.onesound_models;
+
+message User {
+    int32 Id = 1 [json_name="id"]; // unique user identifier
+    string Name = 2 [json_name="name"]; // name
+    string Email = 3 [json_name="email"]; // email
+    string Password = 4 [json_name="password"]; // password
+}

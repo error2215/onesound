@@ -50,7 +50,7 @@ func (r *Request) getNewId(ctx context.Context) int32 {
 	hits, err := client.GetClient().Search().
 		Index(r.index).Query(elastic.NewBoolQuery()).Sort(idField, false).Size(1).Do(ctx)
 	if err != nil {
-		logrus.WithField("func", "getNewId").Error(err)
+		logrus.WithField("func", "room.getNewId").Error(err)
 	}
 	if hits.TotalHits() == 0 {
 		return 1

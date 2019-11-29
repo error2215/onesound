@@ -29,7 +29,7 @@ service OneSoundAPI {
     rpc AddPointToVoting (AddPointToVotingRequest) returns (AddPointToVotingResponse);
 
     rpc Register (RegisterRequest) returns (.onesound.protobuf.common.SimpleResponse);
-    rpc Auth (AuthRequest) returns (AuthResponse);
+    rpc Auth (AuthRequest) returns (.onesound.protobuf.common.SimpleResponse);
 }
 
 /**
@@ -52,7 +52,6 @@ message CreateRoomResponse {
  */
 message DeleteRoomRequest {
     int32 Id = 1; // id of room
-    string Token = 2;// access token that was returned when room was created
 }
 
 /**
@@ -61,7 +60,6 @@ message DeleteRoomRequest {
 message AddVideoRequest{
     string URL = 1;
     string RoomId = 2; // id of room where video must be added
-    string Token = 3; // access token that was returned when room was created
 }
 
 /**
@@ -70,7 +68,6 @@ message AddVideoRequest{
 message SkipVideoRequest{
     string URL = 1; // URL of the video, that must be removed
     string RoomId = 2; // id of room where video must be removed
-    string Token = 3; // access token that was returned when room was created
 }
 
 /**
@@ -78,7 +75,6 @@ message SkipVideoRequest{
  */
 message GetPlaylistRequest{
     string RoomId = 1; // id of requested room's playlist
-    string RoomToken = 2; // access token that was returned when room was created
 }
 
 /**
@@ -94,7 +90,6 @@ message GetPlaylistResponse{
 message CreateVotingRequest{
     .onesound.protobuf.onesound_models.VotingType VotingType = 1; // type of voting
     string RoomId = 2; // id of room where voting must be created
-    string RoomToken = 3; // access token that was returned when room was created
 }
 
 /**
@@ -103,7 +98,6 @@ message CreateVotingRequest{
 message AddPointToVotingRequest{
     string ClientHash = 1; //some unique hash that is generating on client
     string RoomId = 2; // id of room where we are adding point
-    string RoomToken = 3; // access token that was returned when room was created
 }
 
 /**
@@ -119,6 +113,7 @@ message AddPointToVotingResponse{
 message RegisterRequest{
     string Password = 1;
     string Email = 2;
+    string Name = 3;
 }
 
 /**
@@ -127,11 +122,4 @@ message RegisterRequest{
 message AuthRequest{
     string Password = 1;
     string Email = 2;
-}
-
-/**
- * Response of auth
- */
-message AuthResponse{
-    map<string, string> Response = 1;
 }
